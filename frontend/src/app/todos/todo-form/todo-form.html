@@ -1,0 +1,18 @@
+<form class="todo-form" [formRoot]="todoForm">
+  <label class="visually-hidden" for="new-todo">New to-do item</label>
+  <input
+    id="new-todo"
+    type="text"
+    placeholder="What To do?"
+    autocomplete="off"
+    [formField]="todoForm.title"
+    [attr.aria-invalid]="todoForm.title().touched() && todoForm.title().invalid()"
+    aria-describedby="new-todo-error"
+  />
+  <button type="submit" [disabled]="todoForm().submitting()">Add</button>
+</form>
+<p id="new-todo-error" class="field-error" aria-live="polite">
+  @if (todoForm.title().touched() && todoForm.title().invalid()) {
+    {{ todoForm.title().errors()[0].message }}
+  }
+</p>
